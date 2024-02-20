@@ -1,0 +1,48 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+pool:
+  name: project-pool 
+
+variables:
+  # Container registry service connection established during pipeline creation
+  containerregistrytype: $(containerregistrytype)
+  azureContainerRegistry: '{"loginServer":"registrytestt.azurecr.io", "id" : "/subscriptions/f9975a12-2adb-465a-a9c1-83e85eabbfc5/resourceGroups/React/providers/Microsoft.ContainerRegistry/registries/registrytestt"}'
+  imageRepository: $(imageRepository)
+  containerRegistry: $(containerRegistry)
+  dockerfile: $(dockerfile)
+  tag: $(tag)
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: '4e6d138e-33cd-482f-b375-12b70eb30d95'
+  imageRepository: 'todoapp'
+  containerRegistry: 'registrytestt.azurecr.io'
+  dockerfilePath: '**/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
