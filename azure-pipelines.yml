@@ -15,6 +15,7 @@ variables:
   # Container registry service connection established during pipeline creation
   containerregistrytype: $(containerregistrytype)
   azureContainerRegistry: $(azureContainerRegistry)
+  azureSubscription: $(azureSubscription)
   imageRepository: $(imageRepository)
   containerRegistry: $(containerRegistry)
   dockerfile: $(dockerfile)
@@ -28,7 +29,22 @@ stages:
     displayName: Build
     pool:
       vmImage: $(vmImageName)
+    
     steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Acregistry'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az container create \
+            --name todoapp \
+            --resource-group React \
+            --image $(containerRegistry)/$(imageRepository):$(tag) \
+            --registry-login-server $(containerRegistry) \
+            --registry-username registrytestt  \
+            --registry-password XXXX \
+
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
@@ -38,3 +54,5 @@ stages:
         containerRegistry: $(azureContainerRegistry)
         tags: |
           $(tag)
+
+
