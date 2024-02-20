@@ -20,14 +20,6 @@ variables:
   dockerfile: $(dockerfile)
   tag: $(tag)
 
-variables:
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '4e6d138e-33cd-482f-b375-12b70eb30d95'
-  imageRepository: 'todoapp'
-  containerRegistry: 'registrytestt.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
-  tag: '$(Build.BuildId)'
-
 stages:
 - stage: Build
   displayName: Build and push stage
