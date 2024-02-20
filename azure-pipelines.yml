@@ -14,7 +14,7 @@ pool:
 variables:
   # Container registry service connection established during pipeline creation
   containerregistrytype: $(containerregistrytype)
-  azureContainerRegistry: '{"loginServer":"registrytestt.azurecr.io", "id" : "/subscriptions/f9975a12-2adb-465a-a9c1-83e85eabbfc5/resourceGroups/React/providers/Microsoft.ContainerRegistry/registries/registrytestt"}'
+  azureContainerRegistry: $(azureContainerRegistry)
   imageRepository: $(imageRepository)
   containerRegistry: $(containerRegistry)
   dockerfile: $(dockerfile)
@@ -35,6 +35,6 @@ stages:
         command: buildAndPush
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(azureContainerRegistry)
         tags: |
           $(tag)
