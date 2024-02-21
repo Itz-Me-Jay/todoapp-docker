@@ -27,6 +27,24 @@ stages:
   - job: Build
     displayName: Build
     steps:
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'service-azure'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az acr login --name=$(containerRegistry)'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(azureContainerRegistry)
+        tags: |
+          $(tag)
+
     - task: AzureCLI@2
       inputs:
         azureSubscription: 'service-azure'
@@ -40,14 +58,3 @@ stages:
             --registry-login-server $(containerRegistry) \
             --registry-username registrytestt  \
             --registry-password XXXX \
-
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(azureContainerRegistry)
-        tags: |
-          $(tag)
-
