@@ -26,14 +26,10 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-
-
-  
-    
     steps:
     - task: AzureCLI@2
       inputs:
-        azureSubscription: 'Free Trial(f9975a12-2adb-465a-a9c1-83e85eabbfc5)'
+        azureSubscription: 'service-azure'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
