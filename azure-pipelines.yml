@@ -13,6 +13,7 @@ pool:
 
 variables:
   # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'f9975a12-2adb-465a-a9c1-83e85eabbfc5'
   containerregistrytype: $(containerregistrytype)
   containerRegistry: 'Acregistry'
   imageRepository: $(imageRepository)
@@ -29,7 +30,7 @@ stages:
     steps:
     - task: AzureCLI@2
       inputs:
-        azureSubscription: 'Acregistry'
+        # azureSubscription: 'Free Trial(f9975a12-2adb-465a-a9c1-83e85eabbfc5)'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
