@@ -14,10 +14,10 @@ pool:
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'f9975a12-2adb-465a-a9c1-83e85eabbfc5'
-  containerregistrytype: $(containerregistrytype)
+  containerregistrytype: 'Azure Container Registry'
   containerRegistry: 'Acregistry'
-  imageRepository: $(imageRepository)
-  dockerfile: $(dockerfile)
+  imageRepository: 'project1React'
+  dockerfile: $(Build.SourcesDirectory)/Dockerfile
   tag: '$(Build.BuildId)'
 
 stages:
