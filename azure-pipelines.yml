@@ -17,7 +17,7 @@ variables:
   containerregistrytype: 'Azure Container Registry'
   containerRegistry: 'registrytestt'
   imageRepository: 'project1React'
-  dockerfile: $(Build.SourcesDirectory)/Dockerfile
+  dockerfilePath: $(Build.SourcesDirectory)/Dockerfile
   tag: '$(Build.BuildId)'
 
 stages:
