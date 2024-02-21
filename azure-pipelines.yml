@@ -15,7 +15,7 @@ variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'f9975a12-2adb-465a-a9c1-83e85eabbfc5'
   containerregistrytype: 'Azure Container Registry'
-  containerRegistry: 'Acregistry'
+  containerRegistry: 'registrytestt'
   imageRepository: 'project1React'
   dockerfile: $(Build.SourcesDirectory)/Dockerfile
   tag: '$(Build.BuildId)'
