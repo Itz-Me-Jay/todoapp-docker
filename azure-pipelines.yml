@@ -18,7 +18,7 @@ variables:
   containerRegistry: 'Acregistry'
   imageRepository: $(imageRepository)
   dockerfile: $(dockerfile)
-  tag: $(tag)
+  tag: '$(Build.BuildId)'
 
 stages:
 - stage: Build
