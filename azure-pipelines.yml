@@ -86,6 +86,6 @@ stages:
             --name todoapp \
             --resource-group React \
             --image $(containerRegistry)/$(imageRepository):$(tag) \
-            --registry-login-server $(containerRegistry) \
+            --registry-login-server $(containerRegistry).azurecr.io \
             --registry-username registrytestt  \
             --registry-password XXXX \
