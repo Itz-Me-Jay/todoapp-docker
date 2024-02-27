@@ -3,10 +3,7 @@ FROM node:lts-alpine AS installer
 WORKDIR /src
 COPY package*.json ./ 
 RUN npm config set registry https://registry.npmjs.org/
-
-RUN npm ci
-
-
+RUN npm install
 
 COPY . .
 RUN npm run build
