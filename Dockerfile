@@ -1,11 +1,15 @@
 FROM node:lts-alpine AS installer
 
-WORKDIR /app
+WORKDIR /src
 COPY package*.json ./ 
+RUN npm config set registry https://registry.npmjs.org/
+
+RUN npm ci
 RUN npm install
+
 
 COPY . .
 RUN npm run build
 
 FROM nginx:alpine AS deployer
-COPY --from=installer /app/build /usr/share/nginx/html
+COPY --from=installer /src/build /usr/share/nginx/html
