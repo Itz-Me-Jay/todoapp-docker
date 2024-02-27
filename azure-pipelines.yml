@@ -59,22 +59,22 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    steps:
-    - task: Docker@2
-      displayName: Build and push image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(ContainerRegistry)
-        tags: |
-          $(tag)
+    
+    # - task: Docker@2
+    #   displayName: push image to container registry
+    #   inputs:
+    #     command: buildAndPush
+    #     repository: $(imageRepository)
+    #     dockerfile: $(dockerfilePath)
+    #     containerRegistry: $(ContainerRegistry)
+    #     tags: |
+    #       $(tag)
 
-- stage: Deploy
-  displayName: Deploy to Azure Container Instance
+- stage: Push
+  displayName: push to Azure Container Instance
   jobs:
-  - job: Deploy
-    displayName: Deploy
+  - job: push
+    displayName: push to ACR
     steps:
     - task: AzureCLI@2
       inputs:
