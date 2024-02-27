@@ -17,7 +17,7 @@ variables:
   dockerRegistryServiceConnection: 'f9975a12-2adb-465a-a9c1-83e85eabbfc5'
   containerregistrytype: 'Azure Container Registry'
   containerRegistry: 'ACR-connection'
-  imageRepository: 'registrytestt'
+  imageRepository: 'nginx'
   dockerfilePath: $(Build.SourcesDirectory)/Dockerfile
   tag: '$(Build.BuildId)'
 
